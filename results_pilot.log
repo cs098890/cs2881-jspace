@@ -1,0 +1,5 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files:  67%|██████▋   | 2/3 [09:59<04:59, 299.55s/it]Fetching 3 files: 100%|██████████| 3/3 [09:59<00:00, 174.84s/it]Fetching 3 files: 100%|██████████| 3/3 [09:59<00:00, 199.78s/it]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7630.26it/s]
+[  606.4s] loaded Qwen/Qwen3-4B (36L, d=2560); band=[12, 13, 14, 15, 16, 17, 18, 19]
+[  613.4s] fit corpus: 256 batches x 8 seqs
