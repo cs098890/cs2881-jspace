@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Large artifacts (regenerable; exceed GitHub's 100MB limit)
+*.pt
+results_pilot/
+results_local/
+results/figures_smoke/
+*.log
+report.html
