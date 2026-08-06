@@ -1,18 +1,16 @@
-# What does written reasoning actually replace? A dose-response test of the J-space trade-off
 
-CS 2881 Homework Zero, **Qwen3-4B**, Apple Silicon, forward passes only.
+CS 2881 Homework Zero Attempt, **Qwen3-4B**
 
 Gurnee et al. (2026) find that GSM8K solved with explicit chain of thought is far more
 robust to J-space ablation than the same problems answered directly. This repo asks whether
 that interchangeability between the internal workspace and the written page survives as
-problems get harder. It does not, in this setup, and the report is explicit about how much
+problems get harder. It does not, in this setup, and this report is explicit about how much
 of that is a limitation of the proxy lens used rather than a claim about the model.
 
 ## Links
 
 | What | Where |
 |---|---|
-| Assignment | https://boazbk.github.io/mltheoryseminar/hw0-2026/ |
 | This repository | https://github.com/cs098890/cs2881-jspace |
 | Paper (Transformer Circuits) | https://transformer-circuits.pub/2026/workspace/index.html |
 | Paper (arXiv) | https://arxiv.org/abs/2607.15495 |
@@ -33,10 +31,9 @@ of that is a limitation of the proxy lens used rather than a claim about the mod
 
 Both pre-registration files were committed before results existed; `git log` is the record.
 
-## The design, and why it is not the obvious one
-
+## Design
 The obvious design generates a chain of thought under each ablation condition and grades
-the answer. We started there and abandoned it. **Ablating the J-space changes what the
+the answer. We started there and attempted an alternative approach. **Ablating the J-space changes what the
 model writes**, so an accuracy drop is ambiguous between "the model needed its workspace to
 reason over the page" and "the model wrote a worse page and then reasoned over that page
 perfectly well." The paper's GSM8K result carries the same ambiguity.
@@ -187,7 +184,7 @@ uv run python scripts/run_experiment.py --device mps --n-gsm8k 8 --n-math 8 --n-
 ```
 
 This writes `results_local/lens.pt` (the averaged Jacobians for layers 12-19 plus token
-frequencies). Roughly 20 minutes on an M5 Pro; it stops being the bottleneck on a GPU. Then
+frequencies).Then
 inspect it against the logit lens:
 
 ```bash
@@ -205,8 +202,7 @@ estimate is rank-deficient and its readouts were not interpretable, which is why
 lens carries the headline numbers. Raising `--n-probes` past 2560 is the single highest-value
 follow-up. See the report's Analysis section.
 
-**Model weights.** Downloaded from Hugging Face on first run, not vendored.
-
+**Model weights.** Downloaded from Hugging Face on first run.
 ## The lens caveat
 
 The reported run uses the **logit lens** (`J = I` in the paper's formulation) as a proxy for
