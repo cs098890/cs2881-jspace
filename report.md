@@ -1,119 +1,113 @@
-# J-space ablation and external chain of thought: does the trade-off survive difficulty?
+# What does written reasoning actually replace? A dose-response test of the J-space trade-off
 
-**CS 2881 Homework Zero — Qwen3-4B**
+**Homework Zero, Fall 2026 — Qwen3-4B**
 Code: https://github.com/cs098890/cs2881-jspace
 
-## 1. Hypothesis
+## Scope
 
-*(Pre-registered in `HYPOTHESIS.md`, committed before any experiment was run.)*
+This was done alongside a full-time internship and without access to a GPU. Given that, I
+spent the time on understanding the paper and on the question of what separates a weak
+experimental design from a strong one, and I deliberately kept the empirical component
+small enough to run honestly on a laptop rather than large enough to look impressive. The
+results below are underpowered, and where they are inconclusive I have said so rather than
+reaching. The design reasoning, the controls, and the pre-registration are the parts I
+would want read most carefully.
 
-Gurnee et al. (2026) find that ablating the J-space — zeroing the residual stream's
-projection onto the top-k active J-lens vectors, at every token position across a band of
-intermediate layers — leaves parsing, classification and one-step recall largely intact
-but collapses internal multi-step reasoning. GSM8K solved with explicit chain of thought
-is far more robust to this ablation than the same problems answered directly, which they
-read as the model externalizing onto the page what it would otherwise hold internally.
+## Hypothesis
 
-**H1 (primary).** The protective effect of chain of thought against J-space ablation
-*decreases* as problem difficulty increases. Chain of thought can substitute for the
-internal workspace only insofar as the reasoning state is fully externalizable as text.
-On GSM8K each written line ("48 / 2 = 24") carries essentially the whole state forward, so
-the internal workspace is nearly redundant. On harder problems much of the work is not
-executing a step but *choosing* one — search over strategies, holding candidate approaches
-in parallel, recognizing structure, backtracking — and that deliberation is precisely the
-flexible cognition the J-space is claimed to mediate, and precisely what does *not* get
-written down. The page records the output of a selection, not the selection.
+Gurnee et al. (2026) find that GSM8K solved with explicit chain of thought is far more
+robust to J-space ablation than the same problems answered directly, and read this as the
+model writing down what it would otherwise hold in its internal workspace. The two
+scratchpads look interchangeable. GSM8K is one point on a difficulty axis and an easy one,
+so the question here is whether that interchangeability survives as problems get harder.
 
-**H2 (competing).** Protection is constant or *increases* with difficulty: harder problems
-carry more intermediate state, so writing it down should help more, not less.
+Writing things down substitutes for internal workspace only for the part of the work that
+is bookkeeping. It does not substitute for the part that decides what to write next. Doing
+long division on paper barely taxes working memory, because the paper holds every
+intermediate and the procedure tells you where to look. Doing a proof on paper is
+different: the paper holds the steps already taken, but choosing the next step still
+happens in your head. Easy arithmetic is long division. Competition maths is the proof.
 
-**H3 (null).** The ablation is generic damage, and the CoT advantage is an artifact of
-longer generations having more room to recover.
+**H1'.** The gap between clean and ablated answer log-probability is largest when no chain
+of thought is supplied, and closes as more of it is supplied. The value of `f` at which it
+closes rises with difficulty.
 
-PLACEHOLDER_PREDICTIONS
+Recorded in `PREREGISTRATION.md` before the run, along with the three results that would
+falsify it and the outcome I expected.
 
-## 2. Experiment design
+## Experiment design
 
-A 3 x 2 x 3 grid: {GSM8K, MATH-500, AIME 2025} x {chain of thought, direct answer} x
-{clean, J-space ablated, random-direction control}.
+The obvious design generates a chain of thought under each condition and grades the
+answer. I started there and abandoned it, for a reason that is not about compute. Ablating
+the J-space changes what the model writes. So a drop in accuracy is ambiguous between two
+claims: the model needed its workspace to reason over the page, or the model wrote a worse
+page and then reasoned over that page perfectly well. The design cannot separate them, and
+the paper's GSM8K result carries the same ambiguity.
 
-**Metric.** Exact-match accuracy on the extracted final answer, with 95% Wilson intervals
-(which stay well-behaved at zero and at small n — both expected here). From these:
+The design used instead **supplies** the chain of thought rather than generating it. For
+each problem I take the reference solution, strip the stated answer off the end, give the
+model the first `f` fraction of it, and measure the log probability it assigns to the
+correct answer. Sweeping `f` from 0 to 1 produces a dose-response curve. At `f = 0` the
+model has no external scratchpad. At `f = 1` the whole derivation is on the page but the
+answer is not.
 
-- *retention* = acc(ablated) / acc(clean), computed within a condition, so each condition
-  is normalized by its own unablated baseline;
-- *protection margin* = retention(CoT) − retention(direct), the quantity H1 predicts
-  should shrink with difficulty.
+Because the supplied text is byte-identical across conditions, the ablation cannot produce
+an effect by changing what got written. That confound is closed by construction rather than
+argued away. The design also turns a binary correct-or-wrong into a continuous measure,
+which is what makes a run of this size worth anything at all.
 
-**Why this design can disconfirm.** Three separate ways the result could come out against
-H1, all visible:
+Conditions are `clean`, `jspace` (the paper's ablation), and two controls. `ctrl_random`
+removes k random directions and rescales the removal to have the same norm as the `jspace`
+removal at that position, which separates the workspace from generic damage of equal size.
+`ctrl_rank` removes lens vectors at ranks 1000 to 1010: same vector family, same geometry,
+wrong contents. The first tests whether removing directions hurts. The second tests whether
+lens-shaped directions are load-bearing. Only a result where `jspace` separates from both
+supports the workspace reading.
 
-1. *The random-direction control.* It removes the same number of directions, drawn from the
-   same J-lens dictionary, at the same layers and token positions, using the identical
-   span-removal operation. If it degrades accuracy as much as J-space ablation, the effect
-   is generic perturbation, not the workspace — H3. This is the control that separates
-   "we broke the J-space" from "we broke the model."
-2. *Difficulty ordering fixed in advance.* Protection is measured on a common scale per
-   dataset with the tiers ordered before seeing data, so a flat or rising trend (H2) reads
-   as clearly as a falling one.
-3. *Clean baselines reported alongside.* If direct-answer accuracy is unaffected by
-   ablation, the premise of the original result fails to replicate at this scale, and we
-   would report that rather than the trend.
+Disconfirming evidence appears in the same plot as confirming evidence. A flat gap in `f`
+means the page does not substitute at all. A gap closing at the same `f` on every tier means
+substitution works but its cost does not depend on difficulty. No measurable gap at `f = 0`
+means the comparison is uninformative rather than that the hypothesis failed, and is
+reported as a null.
 
-**Anticipated confounds, recorded in advance.**
+Difficulty is a six-point ladder rather than three datasets. MATH-500 is split by its own
+level labels, which puts resolution in the middle of the range instead of only at the ends.
 
-- *Floor effects.* AIME direct accuracy for a 4B model in non-thinking mode may be ~0 even
-  clean, making retention undefined. We therefore report absolute accuracies and clean
-  baselines alongside every ratio, and treat a floor as "untestable at this tier" rather
-  than reading a trend into noise.
-- *Length confound.* CoT conditions emit more tokens, giving the ablation more
-  opportunities to bite but also more opportunity to self-correct. Intrinsic to the
-  comparison; we report mean completion length per cell so the reader can see it.
-- *Power.* With n of 30-40, Wilson intervals are roughly ±15pp; differences under ~20pp are
-  not resolvable and are reported as inconclusive.
+## Experimental details
 
-## 3. Experimental details
+**Model.** `Qwen/Qwen3-4B`, bfloat16, on Apple Silicon via MPS. Forward passes only, no
+generation.
 
-**Model.** `Qwen/Qwen3-4B` (36 layers, d_model 2560, vocab 151,936), bfloat16, greedy
-decoding, `enable_thinking=False`.
+**Lens.** The logit lens, which is `J = I` in the paper's formulation. The paper reports it
+captures much of the same workspace structure with somewhat lower reliability, particularly
+in early layers. Computing the true averaged Jacobians needs many backward passes per layer
+and was out of reach at full scale here. Code to compute them is in `src/jspace/lens.py`;
+it was run at reduced scale (2048 probes for `d_model` = 2560, layers 12–19) and the
+resulting readouts were inspected against the logit lens in `scripts/validate_lens.py`. At
+that probe count the estimate is rank-deficient and its readouts were not clearly
+interpretable — top tokens at layers 17–19 were dominated by punctuation and fragments
+rather than concepts — which is why the logit lens carries the headline numbers rather than
+a Jacobian we could not validate. **This is the single largest caveat on everything below.**
 
-**Fitting the lens.** J_l = E[∂h_final,t' / ∂h_l,t] over source position t, all subsequent
-positions t' and a corpus of WikiText-103 chunks (128 tokens). Computing a full 2560x2560
-Jacobian by exact backpropagation would need 2560 backward passes per prompt, so we use a
-randomized estimator: for a random probe u, backpropagating s = Σ_t' u·h_final,t' yields
-g_l,t = J_l,t^T u at every layer and position in a *single* backward pass (causal masking
-supplies the t' ≥ t restriction automatically), and E[u g^T] = E[u u^T J] = J. One backward
-pass therefore supplies every layer at once. PLACEHOLDER_PROBES
+**Ablation.** At every position, in every layer of the medium band, rank lens vectors by
+correlation against the residual stream, drop any token in the clean pass top-10, take the
+top `k = 10`, and remove the residual stream's least-squares projection onto their span.
+The paper's percent-of-depth bands (38 to 70 for medium) are mapped onto Qwen3-4B's layer
+count at load time, giving **layers 14–24**. The clean pass is also the baseline, so the
+exemption costs nothing extra.
 
-**J-lens vectors and the dictionary.** The J-lens vectors are the rows of W_U J_l,
-unit-normalized. We restrict the dictionary to the 20,000 most frequent tokens in the
-fitting corpus.
+**Sample sizes.** PLACEHOLDER_SIZES
 
-**Ablation.** At every token position, across layers PLACEHOLDER_BAND, we score all
-dictionary vectors by correlation with the residual stream, keep the top k=10 with
-non-negative correlation, and remove the exact least-squares projection of the residual
-stream onto their span. Following the paper, tokens appearing in the top-10 of a clean
-forward pass are protected; because the ablated run's context diverges from the clean one,
-we maintain two KV caches over the same token sequence — one advanced with ablation off to
-read the clean top-10, one with ablation on that actually generates.
-
-**Deviations from the paper, and their direction.** (i) The paper solves for a sparse
-non-negative combination by gradient pursuit; we use one-shot top-k selection with an exact
-refit on the selected vectors. (ii) The dictionary is 20k tokens, not the full 151,936 —
-full-vocabulary pursuit at every token, layer and decode step is roughly 150x our entire
-compute budget. Both make the ablation *weaker* than the paper's, so both bias toward a
-null result rather than toward confirming H1. (iii) Thinking mode is disabled.
-
-**Data.** GSM8K (`openai/gsm8k`, `main`, test); MATH-500 (`HuggingFaceH4/MATH-500`, test);
-**AIME 2025** (AIME I + II, 30 problems, `yentinglin/aime_2025`). AIME 2025 rather than 2024
-because Qwen3's pretraining window makes 2024 a contamination risk.
-
-PLACEHOLDER_COMPUTE
-
-## 4. Results
+## Experimental results
 
 PLACEHOLDER_RESULTS
 
-## 5. Analysis
+## Analysis of results
 
 PLACEHOLDER_ANALYSIS
+
+## References
+
+Gurnee, W. et al. (2026). *Verbalizable Representations Form a Global Workspace in Language
+Models.* Transformer Circuits Thread, Anthropic.
+https://transformer-circuits.pub/2026/workspace/index.html

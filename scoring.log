@@ -8,3 +8,6 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 [    7.1s]   tier 5 (MATH L5): 12 problems
 [    7.1s]   tier 6 (AIME 2025): 12 problems [no reference solutions -> f=0 only]
 [   31.7s]   tier 1 f=0.0: 12 problems x 4 conditions (25s)
+[   63.4s]   tier 1 f=0.25: 12 problems x 4 conditions (32s)
+[  100.9s]   tier 1 f=0.5: 12 problems x 4 conditions (37s)
+[  140.2s]   tier 1 f=0.75: 12 problems x 4 conditions (39s)
