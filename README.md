@@ -228,3 +228,6 @@ The lens-fitting corpus (only relevant if you regenerate the Jacobian) is
 
 `Qwen/Qwen3-4B`, 36 layers, d_model 2560, vocab 151,936. Medium band (38-70% of depth) maps
 to layers **14-24**.
+
+Use of AI
+I used AI as a thought partner and for help in execution. The hypothesis, the decision to abandon the generate-and-grade design, the dose-response redesign, the choice of controls, and the interpretation of the results are iterated with AI and AI was used as a tool to help me learn and walkthrough the results. 
