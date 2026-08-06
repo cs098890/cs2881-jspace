@@ -1,0 +1,7 @@
+tier,tier_label,closure_f,note
+1,GSM8K,,"no measurable gap even at f=0; null result for this tier, excluded from the trend"
+2,MATH L1-2,,"no measurable gap even at f=0; null result for this tier, excluded from the trend"
+3,MATH L3,,gap never closes within the tested range of f
+4,MATH L4,,gap never closes within the tested range of f
+5,MATH L5,,"no measurable gap even at f=0; null result for this tier, excluded from the trend"
+6,AIME,,gap never closes within the tested range of f

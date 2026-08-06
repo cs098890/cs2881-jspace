@@ -11,19 +11,19 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 CSS = """
-@page { size: letter; margin: 0.7in; }
+@page { size: letter; margin: 0.6in; }
 body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
-       font-size: 9.4pt; line-height: 1.34; color: #111; }
-h1 { font-size: 14pt; margin: 0 0 2pt; }
-h2 { font-size: 11pt; margin: 11pt 0 3pt; border-bottom: 1px solid #ccc; padding-bottom: 2pt; }
-h3 { font-size: 9.8pt; margin: 8pt 0 2pt; }
-p, li { margin: 3pt 0; }
-code { font-family: "SF Mono", Menlo, monospace; font-size: 8.4pt; background: #f4f4f4;
+       font-size: 8.6pt; line-height: 1.26; color: #111; }
+h1 { font-size: 12.5pt; margin: 0 0 2pt; }
+h2 { font-size: 10pt; margin: 8pt 0 2pt; border-bottom: 1px solid #ccc; padding-bottom: 1pt; }
+h3 { font-size: 9pt; margin: 6pt 0 1pt; }
+p, li { margin: 2.2pt 0; }
+code { font-family: "SF Mono", Menlo, monospace; font-size: 7.8pt; background: #f4f4f4;
        padding: 0 2px; }
-table { border-collapse: collapse; width: 100%; margin: 5pt 0; font-size: 8.2pt; }
-th, td { border: 1px solid #bbb; padding: 2.5pt 4pt; text-align: left; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0; font-size: 7.6pt; }
+th, td { border: 1px solid #bbb; padding: 1.8pt 3pt; text-align: left; }
 th { background: #eee; }
-img { max-width: 100%; margin: 5pt 0; }
+img { max-width: 52%; display: block; margin: 4pt auto; }
 blockquote { margin: 4pt 0 4pt 10pt; color: #444; border-left: 2px solid #ccc; padding-left: 8pt; }
 """
 
