@@ -6,13 +6,13 @@ Code: https://github.com/cs098890/cs2881-jspace
 
 ## Scope
 
-This was done alongside a full-time internship and without access to a GPU. Given that, I
-spent the time on understanding the paper and on the question of what separates a weak
-experimental design from a strong one, and I deliberately kept the empirical component
-small enough to run honestly on a laptop rather than large enough to look impressive. The
-results below are underpowered, and where they are inconclusive I have said so rather than
-reaching. The design reasoning, the controls, and the pre-registration are the parts I
-would want read most carefully.
+This was done alongside a full-time internship and on a laptop rather than a GPU. Given
+that, I spent the time on understanding the paper and on the question of what separates a
+weak experimental design from a strong one, and I deliberately kept the empirical component
+small enough to run end to end on the hardware I had rather than large enough to look
+impressive. The results below are underpowered, and where they are inconclusive I have said
+so rather than reaching. The design reasoning, the controls, and the pre-registration are
+the parts I would want read most carefully.
 
 ## Hypothesis
 
@@ -305,8 +305,8 @@ of thought, so the scratchpad taken away and the scratchpad supplied are the sam
 
 I used AI as a thought partner and for help in execution. The hypothesis, the decision to
 abandon the generate-and-grade design, the dose-response redesign, the choice of controls,
-and the interpretation of the results are mine. I remain responsible for understanding and
-checking everything submitted here.
+and the interpretation of the results were iterated with the help of AI while actively
+learning. I remain responsible for understanding and checking everything submitted here.
 
 ## References
 
