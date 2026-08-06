@@ -94,19 +94,25 @@ def main():
     log(f"dictionaries: {len(dicts)} layers x {dicts[band[0]].shape}")
 
     # ---- 3. run the condition grid ----
-    datasets = [("gsm8k", args.n_gsm8k, 256), ("math500", args.n_math, 384),
-                ("aime2025", args.n_aime, 512)]
+    # Generation budgets: Qwen3-4B writes verbose markdown CoT even with thinking off;
+    # too short a budget truncates the clean baseline and inflates apparent retention.
+    datasets = [("gsm8k", args.n_gsm8k, 512), ("math500", args.n_math, 640),
+                ("aime2025", args.n_aime, 768)]
     results_path = outdir / "raw_generations.jsonl"
     fout = results_path.open("a")
 
+    loaded = {}
     for ds_name, n, cot_tokens in datasets:
         try:
-            problems = load_problems(ds_name, n)
+            loaded[ds_name] = (load_problems(ds_name, n), cot_tokens)
+            log(f"{ds_name}: {len(loaded[ds_name][0])} problems")
         except Exception as e:
-            log(f"!! could not load {ds_name}: {e}"); continue
-        log(f"{ds_name}: {len(problems)} problems")
+            log(f"!! could not load {ds_name}: {e}")
 
-        for condition in ["cot", "direct"]:
+    # Cheap `direct` cells first, across all datasets, so that running out of wall clock
+    # costs us CoT cells on the hardest tier rather than an entire difficulty tier.
+    for condition in ["direct", "cot"]:
+        for ds_name, (problems, cot_tokens) in loaded.items():
             max_new = cot_tokens if condition == "cot" else 24
             prompts = [build_prompt(tok, p["problem"], condition) for p in problems]
 

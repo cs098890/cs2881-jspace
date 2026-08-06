@@ -31,10 +31,22 @@ from .lens import _decoder_blocks
 @dataclasses.dataclass
 class AblationConfig:
     layers: list[int]                # workspace band to ablate
-    k: int = 10                      # top-k active J-lens vectors per position
-    mode: str = "jspace"             # "jspace" | "random" | "none"
+    k: int = 10                      # top-k active lens vectors per position
+    mode: str = "jspace"             # see below
     exclude_clean_topk: int = 10     # skip tokens in the clean forward pass's top-10
     seed: int = 0
+    rank_offset: int = 1000          # ctrl_rank uses ranks [offset, offset+k)
+
+# Modes:
+#   none         no intervention (the clean baseline)
+#   jspace       remove the span of the top-k active lens vectors
+#   ctrl_random  remove k random directions, rescaled so that the residual-stream
+#                displacement has the SAME NORM as the jspace removal would have had at
+#                that position. Isolates "does removing this much signal hurt?"
+#   ctrl_rank    remove lens vectors at ranks [rank_offset, rank_offset+k): same vector
+#                family, same geometry, wrong contents. Isolates "are lens-shaped
+#                directions load-bearing, or specifically the active ones?"
+#   random       legacy unmatched random control
 
 
 def _remove_span(h: Tensor, dirs: Tensor) -> Tensor:
@@ -76,7 +88,7 @@ class JSpaceAblator:
         self.n_calls = 0
         self.enabled = True    # toggled off for the paired clean forward pass
 
-        if cfg.mode == "none":
+        if cfg.mode in ("none", "clean"):
             return
         blocks = _decoder_blocks(model)
         for li in cfg.layers:
@@ -100,29 +112,51 @@ class JSpaceAblator:
         return hook
 
     @torch.no_grad()
+    def _ranked_idx(self, flat: Tensor, D: Tensor, lo: int, k: int) -> Tensor:
+        """Indices of the lens vectors at correlation ranks [lo, lo+k)."""
+        Vp = D.shape[0]
+        c = flat @ D.T                                                # [N, V']
+        if self._excluded is not None:
+            exc = self._excluded.reshape(flat.shape[0], -1).to(flat.device)
+            c = torch.cat([c, torch.zeros(flat.shape[0], 1, device=c.device)], dim=1)
+            c.scatter_(1, exc, float("-inf"))
+            c = c[:, :Vp]
+        c = c.clamp_min(0.0)                                          # non-negative activation
+        return c.topk(min(lo + k, Vp), dim=-1).indices[:, lo:lo + k]
+
+    @torch.no_grad()
     def _ablate(self, h: Tensor, li: int) -> Tensor:
         D = self.dicts[li].to(device=h.device, dtype=torch.float32)   # [V', d]
         B, T, d = h.shape
         flat = h.reshape(B * T, d).float()
-        Vp = D.shape[0]
-
-        if self.cfg.mode == "random":
-            idx = torch.randint(0, Vp, (B * T, self.cfg.k), generator=self._gen).to(h.device)
-        else:
-            c = flat @ D.T                                            # [N, V']
-            if self._excluded is not None:
-                # Protected ids are given as dictionary-subset indices, with V' used as a
-                # sentinel for "token not in the subset"; pad a trash column to absorb it.
-                exc = self._excluded.reshape(B * T, -1).to(h.device)
-                c = torch.cat([c, torch.zeros(B * T, 1, device=c.device)], dim=1)
-                c.scatter_(1, exc, float("-inf"))
-                c = c[:, :Vp]
-            c = c.clamp_min(0.0)                                      # non-negative activation
-            idx = c.topk(self.cfg.k, dim=-1).indices                  # [N, k]
-
-        dirs = D[idx]                                                 # [N, k, d]
-        out = _remove_span(flat, dirs)
+        Vp, k, mode = D.shape[0], self.cfg.k, self.cfg.mode
         self.n_calls += 1
+
+        if mode == "jspace":
+            out = _remove_span(flat, D[self._ranked_idx(flat, D, 0, k)])
+
+        elif mode == "ctrl_rank":
+            idx = self._ranked_idx(flat, D, self.cfg.rank_offset, k)
+            out = _remove_span(flat, D[idx])
+
+        elif mode == "ctrl_random":
+            # Norm-matched: same displacement magnitude as the jspace removal would have
+            # had at this position, but in directions unrelated to the active contents.
+            ref = _remove_span(flat, D[self._ranked_idx(flat, D, 0, k)])
+            target = (flat - ref).norm(dim=-1, keepdim=True)           # [N,1]
+            ridx = torch.randint(0, Vp, (B * T, k), generator=self._gen).to(h.device)
+            rnd = _remove_span(flat, D[ridx])
+            delta = flat - rnd
+            delta = delta / delta.norm(dim=-1, keepdim=True).clamp_min(1e-6) * target
+            out = flat - delta
+
+        elif mode == "random":                                         # legacy, unmatched
+            ridx = torch.randint(0, Vp, (B * T, k), generator=self._gen).to(h.device)
+            out = _remove_span(flat, D[ridx])
+
+        else:
+            return h
+
         return out.reshape(B, T, d).to(h.dtype)
 
     def remove(self):

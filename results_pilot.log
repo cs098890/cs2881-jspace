@@ -3,3 +3,31 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7630.26it/s]
 [  606.4s] loaded Qwen/Qwen3-4B (36L, d=2560); band=[12, 13, 14, 15, 16, 17, 18, 19]
 [  613.4s] fit corpus: 256 batches x 8 seqs
+[ 1902.7s] fitted Jacobian (2048 probes) -> results_pilot/lens.pt
+[ 1906.9s] dictionaries: 8 layers x torch.Size([18835, 2560])
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 148421.90 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 267816.57 examples/s]
+[ 1910.6s] gsm8k: 8 problems
+[ 1951.0s]   gsm8k     cot    none   acc=1/8=0.125 (40s)
+[ 2046.9s]   gsm8k     cot    jspace acc=2/8=0.250 (96s)
+[ 2133.6s]   gsm8k     cot    random acc=2/8=0.250 (87s)
+[ 2136.0s]   gsm8k     direct none   acc=1/8=0.125 (2s)
+[ 2147.0s]   gsm8k     direct jspace acc=0/8=0.000 (11s)
+[ 2157.4s]   gsm8k     direct random acc=0/8=0.000 (10s)
+Generating test split:   0%|          | 0/500 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 500/500 [00:00<00:00, 41936.33 examples/s]
+[ 2159.3s] math500: 8 problems
+[ 2235.7s]   math500   cot    none   acc=0/8=0.000 (76s)
+[ 2497.5s]   math500   cot    jspace acc=0/8=0.000 (262s)
+[ 2742.9s]   math500   cot    random acc=1/8=0.125 (245s)
+[ 2747.2s]   math500   direct none   acc=2/8=0.250 (4s)
+[ 2760.5s]   math500   direct jspace acc=0/8=0.000 (13s)
+[ 2772.6s]   math500   direct random acc=1/8=0.125 (12s)
+Generating train split:   0%|          | 0/30 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 30/30 [00:00<00:00, 2311.04 examples/s]
+[ 2780.3s] aime2025: 8 problems
+[ 2906.6s]   aime2025  cot    none   acc=0/8=0.000 (126s)
+[ 3283.2s]   aime2025  cot    jspace acc=0/8=0.000 (377s)
+[ 3546.7s]   aime2025  cot    random acc=0/8=0.000 (264s)
+[ 3553.5s]   aime2025  direct none   acc=0/8=0.000 (7s)
+[ 3578.0s]   aime2025  direct jspace acc=0/8=0.000 (24s)
+[ 3598.3s]   aime2025  direct random acc=0/8=0.000 (20s)
+[ 3598.3s] done -> results_pilot/raw_generations.jsonl

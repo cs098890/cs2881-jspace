@@ -70,18 +70,60 @@ def _norm(s: str) -> str:
     return s.lower()
 
 
-def extract_answer(text: str) -> str | None:
-    """Pull the predicted answer out of a completion."""
-    m = list(re.finditer(r"(?:the answer is|answer:)\s*\**\s*([^\n]*)", text, re.I))
+def _boxed(text: str) -> str | None:
+    """Extract the last \\boxed{...} with balanced braces (handles \\frac{1}{2})."""
+    out = None
+    for m in re.finditer(r"\\boxed\{", text):
+        i, depth = m.end(), 1
+        while i < len(text) and depth:
+            depth += (text[i] == "{") - (text[i] == "}")
+            i += 1
+        out = text[m.end(): i - 1]
+    return out
+
+
+def _clean_tail(s: str) -> str | None:
+    """Strip markdown/LaTeX wrapping from a captured answer span."""
+    s = s.split("\n")[0].split("</")[0]
+    s = s.replace("*", "").replace("`", "").strip().strip(".").strip()
+    b = _boxed(s)
+    if b is not None:
+        return _norm(b)
+    if not s:
+        return None
+    # "3.5 dollars" / "25 minutes" -> drop the trailing unit words.
+    m = re.fullmatch(r"(-?[\d,]+(?:\.\d+)?)\s*[a-zA-Z%][a-zA-Z %$.]*", s)
     if m:
-        cand = m[-1].group(1).strip()
-        cand = cand.split("</")[0].strip()
-        if cand:
-            boxed = re.search(r"\\boxed\{([^}]*)\}", cand)
-            return _norm(boxed.group(1) if boxed else cand)
-    boxed = list(re.finditer(r"\\boxed\{([^}]*)\}", text))
-    if boxed:
-        return _norm(boxed[-1].group(1))
+        return _norm(m.group(1))
+    # A whole sentence: fall back to its final number.
+    nums = _NUM.findall(s)
+    if nums and len(s) > 24:
+        return _norm(nums[-1])
+    return _norm(s)
+
+
+def extract_answer(text: str) -> str | None:
+    """Pull the predicted answer out of a completion.
+
+    Priority: the explicitly requested "The answer is X" phrasing (last occurrence),
+    then \\boxed{}, then a bare "Answer:" line, then the final number in the text.
+    """
+    m = list(re.finditer(r"the answer is\s*:?\s*(.*)", text, re.I))
+    if m:
+        got = _clean_tail(m[-1].group(1))
+        if got:
+            return got
+
+    b = _boxed(text)
+    if b is not None:
+        return _norm(b)
+
+    m = list(re.finditer(r"(?:^|\n)\s*(?:final answer|answer)\s*:?\s*(.*)", text, re.I))
+    if m:
+        got = _clean_tail(m[-1].group(1))
+        if got:
+            return got
+
     nums = _NUM.findall(text)
     return _norm(nums[-1]) if nums else None
 

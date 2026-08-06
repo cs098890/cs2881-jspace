@@ -1,0 +1,88 @@
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "clean", "logprob_mean": -2.8536338806152344, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "clean", "logprob_mean": -1.273369312286377, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "jspace", "logprob_mean": -2.898366928100586, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "jspace", "logprob_mean": -3.5911402702331543, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -2.6449177265167236, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -4.518096923828125, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -3.470080614089966, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -0.39948543906211853, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "clean", "logprob_mean": 0.0, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "clean", "logprob_mean": 0.0, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "jspace", "logprob_mean": -1.597366099304054e-05, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "jspace", "logprob_mean": -2.384180106673739e-06, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -7.870859553804621e-05, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -0.003611576044932008, "answer": "25", "lens": "logit"}
+{"id": "gsm8k-0", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -3.973640616550256e-07, "answer": "400", "lens": "logit"}
+{"id": "gsm8k-1", "tier": 1, "tier_label": "GSM8K", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": 0.0, "answer": "25", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "clean", "logprob_mean": -5.1045684814453125, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "clean", "logprob_mean": -2.3405935764312744, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "jspace", "logprob_mean": -2.5415501594543457, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "jspace", "logprob_mean": -0.6780255436897278, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -2.850935459136963, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -3.2189457416534424, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -3.769195556640625, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -0.32779455184936523, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "clean", "logprob_mean": -2.1159585230634548e-06, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "clean", "logprob_mean": -8.636248094262555e-05, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "jspace", "logprob_mean": -0.9203420281410217, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "jspace", "logprob_mean": -1.5893458127975464, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -2.3024909496307373, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -3.0603020191192627, "answer": "11", "lens": "logit"}
+{"id": "math2-0", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -9.745187526277732e-06, "answer": "1251", "lens": "logit"}
+{"id": "math1-1", "tier": 2, "tier_label": "MATH L1-2", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -0.00045630388194695115, "answer": "11", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "clean", "logprob_mean": -3.832545518875122, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "clean", "logprob_mean": -9.132200241088867, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "jspace", "logprob_mean": -7.363700866699219, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "jspace", "logprob_mean": -10.651176452636719, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -2.9365148544311523, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -8.325301170349121, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -5.936408519744873, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -10.101507186889648, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "clean", "logprob_mean": -0.2073424905538559, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "clean", "logprob_mean": -5.2826690673828125, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "jspace", "logprob_mean": -7.455021381378174, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "jspace", "logprob_mean": -5.226888179779053, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -3.654451370239258, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -5.287817001342773, "answer": "-120", "lens": "logit"}
+{"id": "math3-0", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -1.5175299644470215, "answer": "900", "lens": "logit"}
+{"id": "math3-1", "tier": 3, "tier_label": "MATH L3", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -4.487360000610352, "answer": "-120", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "clean", "logprob_mean": -4.940717697143555, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "clean", "logprob_mean": -1.2631620168685913, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "jspace", "logprob_mean": -8.158047676086426, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "jspace", "logprob_mean": -5.101088047027588, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -3.9477741718292236, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -4.087130546569824, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -8.130388259887695, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -1.4026401042938232, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "clean", "logprob_mean": -1.3991570472717285, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "clean", "logprob_mean": -2.08018009288935e-05, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "jspace", "logprob_mean": -1.1049599647521973, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "jspace", "logprob_mean": -0.4627980589866638, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -3.454850435256958, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -2.7969353199005127, "answer": "17", "lens": "logit"}
+{"id": "math4-0", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -2.7343149185180664, "answer": "2516_8", "lens": "logit"}
+{"id": "math4-1", "tier": 4, "tier_label": "MATH L4", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -1.353008428850444e-05, "answer": "17", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "clean", "logprob_mean": -2.711938759603072e-05, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "clean", "logprob_mean": -3.546780824661255, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "jspace", "logprob_mean": -1.717329502105713, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "jspace", "logprob_mean": -8.592255592346191, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -4.799007892608643, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -4.235686302185059, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -3.1590361686539836e-06, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -3.3335652351379395, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "clean", "logprob_mean": -3.1921865940093994, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "clean", "logprob_mean": -0.22211241722106934, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "jspace", "logprob_mean": -2.70212721824646, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "jspace", "logprob_mean": -0.857049822807312, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -1.8540046215057373, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "ctrl_random", "logprob_mean": -0.44813138246536255, "answer": "120^\\circ", "lens": "logit"}
+{"id": "math5-0", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -5.25018310546875, "answer": "32", "lens": "logit"}
+{"id": "math5-1", "tier": 5, "tier_label": "MATH L5", "f": 1.0, "condition": "ctrl_rank", "logprob_mean": -0.06765903532505035, "answer": "120^\\circ", "lens": "logit"}
+{"id": "aime-0", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "clean", "logprob_mean": -3.385024070739746, "answer": "70", "lens": "logit"}
+{"id": "aime-1", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "clean", "logprob_mean": -1.8941822052001953, "answer": "588", "lens": "logit"}
+{"id": "aime-0", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "jspace", "logprob_mean": -3.861588954925537, "answer": "70", "lens": "logit"}
+{"id": "aime-1", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "jspace", "logprob_mean": -2.5063788890838623, "answer": "588", "lens": "logit"}
+{"id": "aime-0", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -2.9460530281066895, "answer": "70", "lens": "logit"}
+{"id": "aime-1", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "ctrl_random", "logprob_mean": -3.05928111076355, "answer": "588", "lens": "logit"}
+{"id": "aime-0", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -3.2549054622650146, "answer": "70", "lens": "logit"}
+{"id": "aime-1", "tier": 6, "tier_label": "AIME 2025", "f": 0.0, "condition": "ctrl_rank", "logprob_mean": -2.9222412109375, "answer": "588", "lens": "logit"}

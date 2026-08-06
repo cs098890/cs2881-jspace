@@ -1,0 +1,18 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7275.37it/s]
+[    3.9s] loaded Qwen/Qwen3-4B (36L, d=2560); band=[12, 13, 14, 15, 16, 17, 18, 19]
+[    4.0s] loaded cached lens from results_local/lens.pt
+[    6.5s] dictionaries: 8 layers x torch.Size([18835, 2560])
+[    7.8s] gsm8k: 20 problems
+[    8.9s] math500: 20 problems
+[    9.9s] aime2025: 20 problems
+[   15.3s]   gsm8k     direct none   acc=3/20=0.150 (5s)
+[   38.2s]   gsm8k     direct jspace acc=0/20=0.000 (23s)
+[   60.8s]   gsm8k     direct random acc=2/20=0.100 (23s)
+[   71.1s]   math500   direct none   acc=4/20=0.200 (10s)
+[  122.7s]   math500   direct jspace acc=3/20=0.150 (52s)
+[  162.6s]   math500   direct random acc=2/20=0.100 (40s)
+[  185.4s]   aime2025  direct none   acc=0/20=0.000 (23s)
+[  245.0s]   aime2025  direct jspace acc=0/20=0.000 (60s)
+/Users/sreya/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

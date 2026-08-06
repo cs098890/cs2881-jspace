@@ -16,6 +16,7 @@ app = modal.App("jspace-cot")
 image = (
     modal.Image.debian_slim(python_version="3.12")
     .pip_install("torch", "transformers>=4.51", "datasets", "accelerate", "numpy", "pandas")
+    .env({"HF_HOME": "/cache/hf", "HF_XET_HIGH_PERFORMANCE": "1"})
     .add_local_dir("src", "/root/src")
     .add_local_dir("scripts", "/root/scripts")
 )
@@ -29,7 +30,6 @@ results_vol = modal.Volume.from_name("jspace-results", create_if_missing=True)
     gpu="A100-80GB",          # L40S also works for a 4B model; A100 gives bigger batches
     volumes={"/cache": hf_cache, "/results": results_vol},
     timeout=60 * 60 * 3,
-    env={"HF_HOME": "/cache/hf"},
 )
 def run(n_gsm8k: int = 40, n_math: int = 40, n_aime: int = 30,
         n_probes: int = 4096, batch_size: int = 16, dict_size: int = 20000):
