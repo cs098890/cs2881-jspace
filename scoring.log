@@ -11,3 +11,5 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 [   63.4s]   tier 1 f=0.25: 12 problems x 4 conditions (32s)
 [  100.9s]   tier 1 f=0.5: 12 problems x 4 conditions (37s)
 [  140.2s]   tier 1 f=0.75: 12 problems x 4 conditions (39s)
+[  185.6s]   tier 1 f=1.0: 12 problems x 4 conditions (45s)
+[  208.3s]   tier 2 f=0.0: 12 problems x 4 conditions (23s)
