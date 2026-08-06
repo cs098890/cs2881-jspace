@@ -1,7 +1,6 @@
 # Pre-registration
 
-Written and committed before the main experiments were run. The commit timestamp on this
-file is the record. Nothing below was edited after results came in; corrections and
+Written and committed before the main experiments were run. Nothing below was edited after results came in; corrections and
 surprises go in the report instead.
 
 ## The claim being tested
@@ -60,7 +59,7 @@ advance.
 3. **Protection is negative anywhere.** CoT would be a liability under ablation, perhaps
    because a long generation gives a damaged model more opportunities to go wrong.
 
-## The threat this design is most exposed to
+## Design Risks
 
 Qwen3-4B answering AIME directly, with no reasoning allowed, will be at or near zero
 accuracy before anything is ablated. Retention is undefined when the denominator is zero,
@@ -78,7 +77,7 @@ Three things guard against this:
 3. If the trend is only visible in the floor-affected tiers, the pre-registered conclusion
    is that the result is inconclusive, not that H1 is supported.
 
-## Prior belief, stated honestly
+## Hypothesis: 
 
 I expect H1 to hold directionally but weakly, and I expect the floor problem to eat most of
 the top of the difficulty range. My guess before running is that the informative comparison
@@ -87,7 +86,7 @@ that cannot be interpreted. If that is how it comes out, the report says so.
 
 ---
 
-## Amendment, before the main run
+## Amendment:
 
 The original design generated chains of thought under each condition and graded the final
 answer. It was replaced before any main run was executed, for one methodological reason and
@@ -126,7 +125,7 @@ scale, which is what makes a run this small worth anything at all.
    and it would mean the whole comparison is uninformative rather than that the hypothesis
    is disconfirmed.
 
-### Expected outcome, stated before running
+### Potential expected outcome: 
 
 I expect the f = 0 gap to be real but small, the curves to be noisy at n = 24 per tier, and
 at least one tier to come back with an interval that includes zero. I do not expect to be
