@@ -226,7 +226,7 @@ own confidence interval of zero anywhere in the tested range.
 | MATH L3 | 1.70 | 1.60 | 2.19 | 2.09 | 1.59 | none |
 | MATH L4 | 2.10 | 1.56 | 1.42 | 1.71 | 0.94 | none |
 | MATH L5 | 1.62 * | 1.83 | 2.06 | 1.90 | 1.22 | none |
-| AIME 2025 | 2.47 |, |, |, |, | none |
+| AIME 2025 | 2.47 | n/a | n/a | n/a | n/a | none |
 
 `*` interval includes zero. `†` ceiling artefact, see below.
 
