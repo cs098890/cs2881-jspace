@@ -1,6 +1,6 @@
 # What does written reasoning actually replace? A dose-response test of the J-space trade-off
 
-CS 2881 Homework Zero — **Qwen3-4B**, Apple Silicon, forward passes only.
+CS 2881 Homework Zero, **Qwen3-4B**, Apple Silicon, forward passes only.
 
 Gurnee et al. (2026), [*Verbalizable Representations Form a Global Workspace in Language
 Models*](https://transformer-circuits.pub/2026/workspace/index.html), find that GSM8K
@@ -9,7 +9,7 @@ problems answered directly. This repo asks whether that interchangeability betwe
 internal workspace and the written page survives as problems get harder.
 
 - **Report:** [`report.pdf`](report.pdf)
-- **Pre-registration:** [`PREREGISTRATION.md`](PREREGISTRATION.md) — committed before the
+- **Pre-registration:** [`PREREGISTRATION.md`](PREREGISTRATION.md), committed before the
   main run, including the amendment that replaced the original design and why.
 - **Original (superseded) hypothesis:** [`HYPOTHESIS.md`](HYPOTHESIS.md), kept for the
   record.
@@ -26,7 +26,7 @@ Instead we **supply** the chain of thought. For each problem we take the referen
 solution, strip the stated answer, give the model the first `f` fraction of it, and measure
 the log probability assigned to the correct answer. Sweeping `f` from 0 to 1 gives a
 dose-response curve. Since the supplied text is byte-identical across conditions, the
-ablation cannot act by changing what got written — the confound is closed by construction.
+ablation cannot act by changing what got written, the confound is closed by construction.
 
 | Axis | Levels |
 |---|---|
@@ -35,7 +35,7 @@ ablation cannot act by changing what got written — the confound is closed by c
 | Condition | `clean`, `jspace`, `ctrl_random`, `ctrl_rank` |
 
 **Controls.** `ctrl_random` removes k random directions rescaled to the *same displacement
-norm* as the jspace removal at that position — separating the workspace from generic damage
+norm* as the jspace removal at that position, separating the workspace from generic damage
 of equal size. `ctrl_rank` removes lens vectors at ranks 1000–1010: same vector family, same
 geometry, wrong contents. Only a result where `jspace` separates from **both** supports the
 workspace reading.
@@ -105,8 +105,8 @@ rather than repeating it.
 |---|---|
 | Gap curve, paired bootstrap CIs | `results/figures/table1_gap_curve.csv` |
 | `closure_f` per tier | `results/figures/table2_closure.csv` |
-| Figure 1 — dose-response by tier | `results/figures/fig1_dose_response.png` |
-| Figure 2 — ablation vs. matched controls | `results/figures/fig2_controls.png` |
+| Figure 1, dose-response by tier | `results/figures/fig1_dose_response.png` |
+| Figure 2, ablation vs. matched controls | `results/figures/fig2_controls.png` |
 | Per-control curves | `results/figures/curve_ctrl_*.csv` |
 
 ## The lens caveat
@@ -128,12 +128,12 @@ headline numbers. See the report.
 |---|---|---|---|
 | 1 | GSM8K | `openai/gsm8k` (`main`, test) | `<<...>>` annotations stripped; solution truncated at `####` |
 | 2–5 | MATH-500 by level | `HuggingFaceH4/MATH-500` (test) | solution truncated at the first `\boxed` so the answer never leaks |
-| 6 | **AIME 2025** (AIME I + II, 30 problems) | `yentinglin/aime_2025` (train) | **`solution` field is the bare answer, not a derivation — so AIME appears at `f = 0` only** |
+| 6 | **AIME 2025** (AIME I + II, 30 problems) | `yentinglin/aime_2025` (train) | **`solution` field is the bare answer, not a derivation, so AIME appears at `f = 0` only** |
 
 AIME **2025** rather than 2024, because Qwen3's pretraining window makes 2024 a
 contamination risk.
 
 ## Model
 
-`Qwen/Qwen3-4B` — 36 layers, d_model 2560, vocab 151,936. Medium band (38–70% of depth)
+`Qwen/Qwen3-4B`, 36 layers, d_model 2560, vocab 151,936. Medium band (38–70% of depth)
 maps to layers **14–24**.

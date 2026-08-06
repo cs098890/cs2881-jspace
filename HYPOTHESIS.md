@@ -37,7 +37,7 @@ internal workspace is close to redundant, so removing it costs little.
 On harder problems, much of the work is not executing a step but *choosing* one: search
 over strategies, holding several candidate approaches in parallel, noticing structure,
 backtracking. This is exactly the flexible, non-automatic cognition the paper argues the
-J-space mediates, and it is largely *not* written down — the CoT records the result of a
+J-space mediates, and it is largely *not* written down, the CoT records the result of a
 selection, not the deliberation that produced it. So the external scratchpad should
 substitute less well as difficulty rises.
 
